@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  web:
+    # image: gcr.io/dockerrails/dockerrails:latest
+    build: ./web
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      DB_SERVER: database
+      DB_USER: root
+      DB_PASSWD: P15Oe4EP9gziWzOY4mD
+      DB_PREFIX: _ps
+      DB_NAME: prestashop
+    depends_on:
+      - database
+    links:
+      - database
+    volumes_from:
+      - prestashop-data
+  prestashop-data:
+    image: busybox
+    volumes:
+      - ./web/html/modules:/var/www/html/modules
+      - ./web/html/themes:/var/www/html/themes
+      - ./web/html/override:/var/www/html/override
+      - ./web/html/img:/var/www/html/img
+  database:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: P15Oe4EP9gziWzOY4mD
+    # MYSQL_USER: <yourname>
+    # MYSQL_PASSWORD: <yourpassword>
+    # MYSQL_DATABASE: <yourdatabase>
+    volumes_from:
+      - mysql-data
+  mysql-data:
+    image: busybox
+    volumes:
+      - /var/lib/mysql

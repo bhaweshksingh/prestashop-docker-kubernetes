@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: web
+  creationTimestamp:
+spec:
+  replicas: 1
+  template:
+    metadata:
+      creationTimestamp:
+      labels:
+        service: web
+    spec:
+      containers:
+      - name: web
+        image: gcr.io/ireguacl/ireguacl:1.3
+        args:
+        - "/tmp/docker_run.sh"
+        # workingDir: "/home/app/webapp"
+        env:
+        - name: DB_SERVER
+          value: "database"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASSWD
+          value: "P15Oe4EP9gziWzOY4mD"
+        - name: DB_PREFIX
+          value: "_ps"
+        - name: DB_NAME
+          value: "prestashop"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 50m
+            memory: 250Mi
+          limits:
+            cpu: 300m
+            memory: 500Mi
+        volumeMounts:
+        - name: prestashop-data
+          mountPath: /var/www/html/modules
+        - name: prestashop-data
+          mountPath: /var/www/html/themes
+        - name: prestashop-data
+          mountPath: /var/www/html/override
+        - name: prestashop-data
+          mountPath: /var/www/html/img
+      volumes:
+        - name: prestashop-data
+          persistentVolumeClaim:
+            claimName: prestashop-data-claim
+      restartPolicy: Always
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      # maxUnavailable: 20%
+      maxUnavailable: 1
+      maxSurge: 2
+status: {}
