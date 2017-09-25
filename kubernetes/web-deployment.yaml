@@ -38,6 +38,24 @@ spec:
           limits:
             cpu: 300m
             memory: 500Mi
+        livenessProbe:
+          httpGet:
+            path: /admin229qdvahf
+            port: 80
+          initialDelaySeconds: 300
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
+        readinessProbe:
+          httpGet:
+            path: /admin229qdvahf
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 10
         volumeMounts:
         - name: prestashop-data
           mountPath: /var/www/html/modules
