@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: gcr.io/ireguacl/ireguacl:1.3
+        image: 355645112541.dkr.ecr.us-east-1.amazonaws.com/iregua/web:latest
         args:
         - "/tmp/docker_run.sh"
         # workingDir: "/home/app/webapp"
@@ -23,7 +23,7 @@ spec:
         - name: DB_USER
           value: "root"
         - name: DB_PASSWD
-          value: "P15Oe4EP9gziWzOY4mD"
+          value: "P5Oe4EP9gziWzOY4mD"
         - name: DB_PREFIX
           value: "_ps"
         - name: DB_NAME
@@ -33,11 +33,11 @@ spec:
           protocol: TCP
         resources:
           requests:
-            cpu: 50m
-            memory: 250Mi
+            cpu: 200m
+            memory: 512Mi
           limits:
-            cpu: 300m
-            memory: 500Mi
+            cpu: 250m
+            memory: 512Mi
         livenessProbe:
           httpGet:
             path: /admin229qdvahf

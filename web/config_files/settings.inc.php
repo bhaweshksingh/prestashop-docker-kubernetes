@@ -7,7 +7,7 @@ define('_MYSQL_ENGINE_', 'InnoDB');
 define('_DB_SERVER_', 'database');
 define('_DB_USER_', 'root');
 define('_DB_PREFIX_', 'ps_');
-define('_DB_PASSWD_', 'P15Oe4EP9gziWzOY4mD');
+define('_DB_PASSWD_', 'P5Oe4EP9gziWzOY4mD');
 define('_COOKIE_KEY_', '3QMUO7NZqyEQRvI5UThtHknLRzjp95swmQXQEg0nTnyENvp64SWEVLs8');
 define('_COOKIE_IV_', '7ISkviVm');
 define('_PS_CREATION_DATE_', '2016-06-29');
@@ -21,4 +21,4 @@ if (!defined('_PS_VERSION_'))
 // '_DB_SERVER_', 'database'
 // '_DB_USER_', 'root'
 // '_DB_PREFIX_', 'ps_'
-// '_DB_PASSWD_', 'P15Oe4EP9gziWzOY4mD'
+// '_DB_PASSWD_', 'P5Oe4EP9gziWzOY4mD'

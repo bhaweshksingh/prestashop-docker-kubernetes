@@ -18,7 +18,7 @@ spec:
           - "--ignore-db-dir=lost+found"
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: "P15Oe4EP9gziWzOY4mD"
+          value: "P5Oe4EP9gziWzOY4mD"
         ports:
         - containerPort: 3306
           protocol: TCP
