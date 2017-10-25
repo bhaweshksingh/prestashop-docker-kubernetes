@@ -16,7 +16,6 @@ spec:
         image: 355645112541.dkr.ecr.us-east-1.amazonaws.com/iregua/web:latest
         args:
         - "/tmp/docker_run.sh"
-        # workingDir: "/home/app/webapp"
         env:
         - name: DB_SERVER
           value: "database"
