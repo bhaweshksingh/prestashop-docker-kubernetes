@@ -216,8 +216,47 @@ c838e4909b92e180e6428e85c15b003d
 $ mysql -p<password> prestashop
 $ mysql> SELECT * FROM ps_employee;
 4. Update the user's password using:
-$ mysql> UPDATE ps_employee SET passwd='c838e4909b92e180e6428e85c15b003d' WHERE email = 'aviguera@iregua.cl';
+$ mysql> UPDATE ps_employee SET passwd='c838e4909b92e180e6428e85c15b003d' WHERE email = 'user@yourdomain.com';
 
+### How do I backup my files without FTP access?
+
+```bash
+# On the web container, you can create the backup with these commands:
+apt-get update
+apt-get install zip -y
+find /var/www/html -path '*/.*' -prune -o -type f -print | zip ~/old_site.zip -@
+
+# AWS install on ubuntu OS
+apt-get update \
+&& apt-get install wget python -y \
+&& apt-get install -y s3cmd \
+&& wget -O- -q http://s3tools.org/repo/deb-all/stable/s3tools.key | apt-key add - \
+&& wget -O/etc/apt/sources.list.d/s3tools.list http://s3tools.org/repo/deb-all/stable/s3tools.list \
+&& apt-get update \
+&& apt-get install -y --force-yes --no-install-recommends s3cmd=1.0.0-4 \
+&& apt-get clean \
+&& apt-get autoremove -y \
+&& rm -rf /var/lib/apt/lists/*
+
+# AWS install on Alpine OS
+wget https://www.dropbox.com/s/47bbbm6c68dxdas/s3cmd-1.5.2.tgz
+cp s3cmd-1.5.2.tgz /usr/local/bin/
+
+# Configure aws
+vim /root/.s3cfg #add your config file
+cp .s3cfg /root/.s3cfg
+
+# Upload the files from the old web container
+s3cmd put ~/old_site.zip s3://db-dumps-mp/
+
+# On the new web container, you also want to install and configure AWS
+# Download the files on the new web container
+export S3PATH="s3://db-dumps-mp/"
+export FULLPATH="old_site.zip"
+s3cmd get $S3PATH$FULLPATH
+cd /
+unzip -o $FULLPATH
+```
 
 ### How do I setup WebPay (Chile) on this new server?
 
