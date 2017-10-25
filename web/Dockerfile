@@ -2,8 +2,8 @@ FROM php:5.5-apache
 
 MAINTAINER Thomas Nabord <thomas.nabord@prestashop.com>
 
-ENV PS_DOMAIN <to be defined>
-ENV DB_SERVER <to be defined>
+ENV PS_DOMAIN prestashop
+ENV DB_SERVER database
 ENV DB_PORT 3306
 ENV DB_NAME prestashop
 ENV DB_USER root
@@ -44,13 +44,13 @@ RUN docker-php-source extract \
 
 ENV PS_VERSION 1.6.1.14
 
-# # (OPTION 1) Get PrestaShop from scratch
-# ADD https://www.prestashop.com/download/old/prestashop_1.6.1.14.zip /tmp/prestashop.zip
-# COPY config_files/ps-extractor.sh /tmp/
-# RUN mkdir /tmp/data-ps && unzip -q /tmp/prestashop.zip -d /tmp/data-ps/ && bash /tmp/ps-extractor.sh /tmp/data-ps && rm /tmp/prestashop.zip
+# (OPTION 1) Get PrestaShop from scratch
+ADD https://www.prestashop.com/download/old/prestashop_1.6.1.14.zip /tmp/prestashop.zip
+COPY config_files/ps-extractor.sh /tmp/
+RUN mkdir /tmp/data-ps && unzip -q /tmp/prestashop.zip -d /tmp/data-ps/ && bash /tmp/ps-extractor.sh /tmp/data-ps && rm /tmp/prestashop.zip
 
-# (OPTION 2) Copy prestashop from source
-COPY public_html/. /var/www/html/.
+# # (OPTION 2) Copy prestashop from source
+# COPY public_html/. /var/www/html/.
 
 # Copy config files
 COPY config_files/docker_updt_ps_domains.php /var/www/html/

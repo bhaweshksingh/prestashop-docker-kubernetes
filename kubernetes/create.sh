@@ -16,12 +16,15 @@ else
   # openssl enc -aes-256-cbc -salt -in secret.yaml -out secret.yaml.enc -k $ENV_PASS
 fi
 
-# kubectl create -f ./kubernetes/services/influxdb
+# kubectl create -f ./kubernetes/storage-class.yaml
 
-kubectl create -f ./kubernetes/mysql-persistent-volume.yaml
+# kubectl create -f ./kubernetes/mysql-persistent-volume.yaml
 kubectl create -f ./kubernetes/mysql-persistent-volume-claim.yaml
-kubectl create -f ./kubernetes/prestashop-persistent-volume.yaml
+# kubectl create -f ./kubernetes/mysql-persistent-volume-claim-ebs.yaml
+
+# kubectl create -f ./kubernetes/prestashop-persistent-volume.yaml
 kubectl create -f ./kubernetes/prestashop-persistent-volume-claim.yaml
+# kubectl create -f ./kubernetes/prestashop-persistent-volume-claim-ebs.yaml
 
 kubectl create -f ./kubernetes/mysql-deployment.yaml
 kubectl create -f ./kubernetes/mysql-service.yaml
