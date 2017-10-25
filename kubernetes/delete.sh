@@ -8,7 +8,6 @@ read ans
 if [[ $ans = "y" ]]; then
   echo "Destroying cluster..."
   sleep 2
-  # kubectl delete -f ./kubernetes/services/influxdb
 
   kubectl delete -f ./kubernetes/mysql-persistent-volume.yaml
   kubectl delete -f ./kubernetes/mysql-persistent-volume-claim.yaml
