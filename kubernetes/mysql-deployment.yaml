@@ -24,18 +24,28 @@ spec:
           protocol: TCP
         resources:
           requests:
-              cpu: 50m
-              memory: 100Mi
+            cpu: 200m
+            memory: 500Mi
           limits:
-            cpu: 400m
-            memory: 400Mi
+            cpu: 200m
+            memory: 500Mi
         volumeMounts:
-        - name: mysql-data
+        - name: mysql-data-2
           mountPath: /var/lib/mysql
+        - name: mysql-data
+          mountPath: /mysql-old
+        - name: mysql-data-3
+          mountPath: /etc/mysql/conf.d
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
             claimName: mysql-data-claim
+        - name: mysql-data-2
+          persistentVolumeClaim:
+            claimName: mysql-2-data-claim
+        - name: mysql-data-3
+          persistentVolumeClaim:
+            claimName: mysql-3-data-claim
       restartPolicy: Always
   strategy:
     type: RollingUpdate
