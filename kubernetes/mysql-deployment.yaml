@@ -30,22 +30,17 @@ spec:
             cpu: 200m
             memory: 500Mi
         volumeMounts:
-        - name: mysql-data-2
-          mountPath: /var/lib/mysql
         - name: mysql-data
-          mountPath: /mysql-old
-        - name: mysql-data-3
+          mountPath: /var/lib/mysql
+        - name: mysql-conf
           mountPath: /etc/mysql/conf.d
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
             claimName: mysql-data-claim
-        - name: mysql-data-2
+        - name: mysql-conf
           persistentVolumeClaim:
-            claimName: mysql-2-data-claim
-        - name: mysql-data-3
-          persistentVolumeClaim:
-            claimName: mysql-3-data-claim
+            claimName: mysql-conf-data-claim
       restartPolicy: Always
   strategy:
     type: RollingUpdate

@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: 355645112541.dkr.ecr.us-east-1.amazonaws.com/iregua/web:latest
+        image: 355645112541.dkr.ecr.us-east-1.amazonaws.com/iregua/web:1.0.1
         args:
         - "/tmp/docker_run.sh"
         env:
@@ -32,11 +32,11 @@ spec:
           protocol: TCP
         resources:
           requests:
-            cpu: 200m
-            memory: 512Mi
+            cpu: 490m
+            memory: 1000Mi
           limits:
-            cpu: 250m
-            memory: 512Mi
+            cpu: 500m
+            memory: 1000Mi
         livenessProbe:
           httpGet:
             path: /admin229qdvahf

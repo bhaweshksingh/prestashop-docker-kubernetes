@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: mysql-3-data-claim
+  name: mysql-data-claim
   annotations:
       volume.beta.kubernetes.io/storage-class: "standard"
 spec:
@@ -9,5 +9,19 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 3Gi
 status: {}
+
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: mysql-conf-data-claim
+#   annotations:
+#       volume.beta.kubernetes.io/storage-class: "standard"
+# spec:
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 1Gi
+# status: {}
